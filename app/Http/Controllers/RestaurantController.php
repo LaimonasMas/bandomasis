@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
+use App\Models\Menu;
 
 class RestaurantController extends Controller
 {
@@ -14,7 +15,9 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        //
+        $restaurants = Restaurant::all();
+        return view('restaurant.index', ['restaurants' => $restaurants]);
+ 
     }
 
     /**
@@ -24,7 +27,9 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        //
+        $menus = Menu::all();
+        return view('restaurant.create', ['menus' => $menus]);
+ 
     }
 
     /**
@@ -35,7 +40,14 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $restaurant = new Restaurant;
+        $restaurant->title = $request->restaurant_title;
+        $restaurant->customers = $request->restaurant_customers;
+        $restaurant->employees = $request->restaurant_employees;
+        $restaurant->menu_id = $request->menu_id;
+        $restaurant->save();
+        return redirect()->route('restaurant.index');
+ 
     }
 
     /**
@@ -57,7 +69,9 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        //
+        $menus = Menu::all();
+        return view('restaurant.edit', ['restaurant' => $restaurant, 'menus' => $menus]);
+ 
     }
 
     /**
@@ -69,7 +83,12 @@ class RestaurantController extends Controller
      */
     public function update(Request $request, Restaurant $restaurant)
     {
-        //
+        $restaurant->title = $request->restaurant_title;
+        $restaurant->customers = $request->restaurant_customers;
+        $restaurant->employees = $request->restaurant_employees;
+        $restaurant->menu_id = $request->menu_id;
+        $restaurant->save();
+        return redirect()->route('restaurant.index');
     }
 
     /**
@@ -80,6 +99,7 @@ class RestaurantController extends Controller
      */
     public function destroy(Restaurant $restaurant)
     {
-        //
+        $restaurant->delete();
+        return redirect()->route('restaurant.index');
     }
 }
