@@ -12,24 +12,24 @@
                     <form method="POST" action="{{route('restaurant.update',[$restaurant])}}">
                         <div class="form-group">
                             <label>Title: </label>
-                            <input type="text" class="form-control" name="restaurant_title" value="{{$restaurant->title}}">
+                            <input type="text" class="form-control" name="restaurant_title" value="{{old('restaurant_title',$restaurant->title)}}">
                             <small class="form-text text-muted">Please enter Restaurant Name here</small>
                         </div>
                         <div class="form-group">
                             <label>Customers: </label>
-                            <input type="text" class="form-control" name="restaurant_customers" value="{{$restaurant->customers}}">
+                            <input type="text" class="form-control" name="restaurant_customers" value="{{old('restaurant_customers',$restaurant->customers)}}">
                             <small class="form-text text-muted">Please enter number of Customers here</small>
                         </div>
                         <div class="form-group">
                             <label>Employees: </label>
-                            <input type="text" class="form-control" name="restaurant_employees" value="{{$restaurant->employees}}">
+                            <input type="text" class="form-control" name="restaurant_employees" value="{{old('restaurant_employees',$restaurant->employees)}}">
                             <small class="form-text text-muted">Please enter number of Employees here</small>
                         </div>
                         <div class="form-group">
                             <label>Menu: </label>
                             <select name="menu_id">
                                 @foreach ($menus as $menu)
-                                <option class="form-control" value="{{$menu->id}}">{{$menu->title}}</option>
+                                <option class="form-control" value="{{$menu->id}}" @if($menu->id == $restaurant->menu_id) selected @endif>{{$menu->title}}</option>
                                 @endforeach
                             </select>
                             <small class="form-text text-muted">Please choose the menu from the list above</small>

@@ -16,9 +16,9 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::all();
+        $restaurants = Restaurant::orderBy('title')->get();
         return view('restaurant.index', ['restaurants' => $restaurants]);
- 
+
     }
 
     /**
@@ -41,6 +41,22 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'restaurant_title' => ['required', 'min:3', 'max:200'],
+                'restaurant_customers' => ['required', 'numeric', 'max:9999'],
+                'restaurant_employees' => ['required', 'integer'],
+            ],
+            [
+                'restaurant_title.min' => 'Menu title has to be at least 3 characters.'
+            ]
+        );
+        if ($validator->fails()) {
+            $request->flash();
+            return redirect()->back()->withErrors($validator);
+        }
+
         $restaurant = new Restaurant;
         $restaurant->title = $request->restaurant_title;
         $restaurant->customers = $request->restaurant_customers;
@@ -84,6 +100,22 @@ class RestaurantController extends Controller
      */
     public function update(Request $request, Restaurant $restaurant)
     {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'restaurant_title' => ['required', 'min:3', 'max:200'],
+                'restaurant_customers' => ['required', 'numeric', 'max:9999'],
+                'restaurant_employees' => ['required', 'integer'],
+            ],
+            [
+                'restaurant_title.min' => 'Menu title has to be at least 3 characters.'
+            ]
+        );
+        if ($validator->fails()) {
+            $request->flash();
+            return redirect()->back()->withErrors($validator);
+        }
+        
         $restaurant->title = $request->restaurant_title;
         $restaurant->customers = $request->restaurant_customers;
         $restaurant->employees = $request->restaurant_employees;

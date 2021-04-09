@@ -15,7 +15,7 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $menus = Menu::all();
+        $menus = Menu::orderBy('price')->get();
         return view('menu.index', ['menus' => $menus]);
     }
 
@@ -41,10 +41,10 @@ class MenuController extends Controller
             $request->all(),
             [
                 'menu_title' => ['required', 'min:3', 'max:200'],
-                'menu_price' => ['required', 'integer', 'max:1', 'max:6'],
-                'menu_weight' => ['required', 'integer'],
+                'menu_price' => ['required', 'numeric', 'max:9999'],
+                'menu_weight' => ['required', 'integer', 'gt:menu_meat'],
                 'menu_meat' => ['required', 'integer'],
-                'menu_about' => ['required', 'min:3', 'max:200']
+                'menu_about' => ['required', 'min:3', 'max:300']
             ],
             [
                 'menu_title.min' => 'Menu title has to be at least 3 characters.'
@@ -54,7 +54,6 @@ class MenuController extends Controller
             $request->flash();
             return redirect()->back()->withErrors($validator);
         }
-
 
         $menu = new Menu;
         $menu->title = $request->menu_title;
@@ -97,6 +96,24 @@ class MenuController extends Controller
      */
     public function update(Request $request, Menu $menu)
     {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'menu_title' => ['required', 'min:3', 'max:200'],
+                'menu_price' => ['required', 'numeric', 'max:9999'],
+                'menu_weight' => ['required', 'integer', 'gt:menu_meat'],
+                'menu_meat' => ['required', 'integer'],
+                'menu_about' => ['required', 'min:3', 'max:300']
+            ],
+            [
+                'menu_title.min' => 'Menu title has to be at least 3 characters.'
+            ]
+        );
+        if ($validator->fails()) {
+            $request->flash();
+            return redirect()->back()->withErrors($validator);
+        }
+
         $menu->title = $request->menu_title;
         $menu->price = $request->menu_price;
         $menu->weight = $request->menu_weight;

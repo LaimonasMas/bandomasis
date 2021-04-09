@@ -12,27 +12,27 @@
                     <form method="POST" action="{{route('menu.update',[$menu->id])}}">
                         <div class="form-group">
                             <label>Title: </label>
-                            <input type="text" class="form-control" name="menu_title" value="{{$menu->title}}">
+                            <input type="text" class="form-control" name="menu_title" value="{{old('menu_title',$menu->title)}}">
                             <small class="form-text text-muted">You can edit Menu Title here</small>
                         </div>
                         <div class="form-group">
                             <label>Price: </label>
-                            <input type="text" class="form-control" name="menu_price" value="{{$menu->price}}">
+                            <input type="text" class="form-control" name="menu_price" value="{{old('menu_price',$menu->price)}}">
                             <small class="form-text text-muted">You can edit Price here</small>
                         </div>
                         <div class="form-group">
                             <label>Weight: </label>
-                            <input type="text" class="form-control" name="menu_weight" value="{{$menu->weight}}">
+                            <input type="text" class="form-control" name="menu_weight" value="{{old('menu_weight',$menu->weight)}}">
                             <small class="form-text text-muted">You can edit general Weight here</small>
                         </div>
                         <div class="form-group">
                             <label>Meat: </label>
-                            <input type="text" class="form-control" name="menu_meat" value="{{$menu->meat}}">
+                            <input type="text" class="form-control" name="menu_meat" value="{{old('menu_meat',$menu->meat)}}">
                             <small class="form-text text-muted">You can edit Meat Weight here</small>
                         </div>
                         <div class="form-group">
                             <label>About the menu: </label>
-                            <textarea class="form-control" id="summernote" name="menu_about">{{$menu->about}}</textarea>
+                            <textarea class="form-control" id="summernote" name="menu_about">{{old('menu_about',$menu->about)}}</textarea>
                             <small class="form-text text-muted">You can edit description here</small>
                         </div>
                         @csrf
