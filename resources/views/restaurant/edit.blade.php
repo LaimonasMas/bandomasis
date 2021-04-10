@@ -26,7 +26,7 @@
                             <small class="form-text text-muted">Please enter number of Employees here</small>
                         </div>
                         <div class="form-group">
-                            <label>Menu: </label>
+                            <label>Dish: </label>
                             <select name="menu_id">
                                 @foreach ($menus as $menu)
                                 <option class="form-control" value="{{$menu->id}}" @if($menu->id == $restaurant->menu_id) selected @endif>{{$menu->title}}</option>

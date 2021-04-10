@@ -18,10 +18,23 @@ class RestaurantController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $menus = Menu::orderBy('title')->get();
         $restaurants = Restaurant::orderBy('title')->get();
-        return view('restaurant.index', ['restaurants' => $restaurants]);
+        if ($request->menu_id) {
+            $restaurants = Restaurant::where('menu_id', $request->menu_id)->get();
+            $filterBy = $request->menu_id;
+        }
+        else {
+            $restaurants = restaurant::all();
+        }
+
+        return view('restaurant.index', [
+            'restaurants' => $restaurants,
+            'menus' => $menus,
+            'filterBy' => $filterBy ?? 0,
+            ]);
 
     }
 
@@ -32,7 +45,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        $menus = Menu::all();
+        $menus = Menu::orderBy('title')->get();
         return view('restaurant.create', ['menus' => $menus]);
  
     }
@@ -90,7 +103,7 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        $menus = Menu::all();
+        $menus = Menu::orderBy('title')->get();
         return view('restaurant.edit', ['restaurant' => $restaurant, 'menus' => $menus]);
  
     }

@@ -13,7 +13,7 @@
                         <div class="form-group">
                             <label>Title: </label>
                             <input type="text" class="form-control" name="menu_title" value="{{old('menu_title')}}">
-                            <small class="form-text text-muted">Please enter Menu Title here</small>
+                            <small class="form-text text-muted">Please enter Dish Title here</small>
                         </div>
                         <div class="form-group">
                             <label>Price: </label>
@@ -31,9 +31,9 @@
                             <small class="form-text text-muted">Please enter Meat weight here</small>
                         </div>
                         <div class="form-group">
-                            <label>About the menu: </label>
+                            <label>About the dish: </label>
                             <textarea class="form-control" id="summernote" name="menu_about">{{old('menu_about')}}</textarea>
-                            <small class="form-text text-muted">Please enter Menu description here</small>
+                            <small class="form-text text-muted">Please enter Dish description here</small>
                         </div>
                         @csrf
                         <button class="btn btn-outline-success btn-sm" type="submit">ADD</button>
