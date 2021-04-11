@@ -80,7 +80,7 @@ class RestaurantController extends Controller
         $restaurant->employees = $request->restaurant_employees;
         $restaurant->menu_id = $request->menu_id;
         $restaurant->save();
-        return redirect()->route('restaurant.index');
+        return redirect()->route('restaurant.index')->with('success_message', 'Created successfully!');
  
     }
 
@@ -138,7 +138,7 @@ class RestaurantController extends Controller
         $restaurant->employees = $request->restaurant_employees;
         $restaurant->menu_id = $request->menu_id;
         $restaurant->save();
-        return redirect()->route('restaurant.index');
+        return redirect()->route('restaurant.index')->with('success_message', 'Updated successfully!');
     }
 
     /**
@@ -150,6 +150,6 @@ class RestaurantController extends Controller
     public function destroy(Restaurant $restaurant)
     {
         $restaurant->delete();
-        return redirect()->route('restaurant.index');
+        return redirect()->route('restaurant.index')->with('success_message', 'Deleted successfully!');
     }
 }
