@@ -8,13 +8,13 @@
             margin: 5px;
         }
     }
-    &__books {
+    &__restaurants {
         display: flex;
         flex-direction: column;
         &__title {
             font-weight: bold;
         }
-        &__author {
+        &__menu {
             color: grey;
             font-size: 80%;
             font-style: italic;
