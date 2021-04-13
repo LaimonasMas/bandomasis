@@ -16,7 +16,7 @@
                             <h5>Price: {{$menu->price}} Eur</h5>
                             <h5>Weight: {{$menu->weight}} g</h5>
                             <h5>Meat: {{$menu->meat}} g</h5>
-                            <h5>About: {{$menu->about}}</h5>
+                            <h5>About: {!!$menu->about!!}</h5>
                         </div>
                         <div class="list-line__buttons">
                             <div class="form-group">
