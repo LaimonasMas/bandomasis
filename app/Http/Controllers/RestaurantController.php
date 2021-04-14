@@ -27,7 +27,7 @@ class RestaurantController extends Controller
             $filterBy = $request->menu_id;
         }
         else {
-            $restaurants = restaurant::all();
+            $restaurants = restaurant::orderBy('title')->get();
         }
 
         return view('restaurant.index', [

@@ -8,7 +8,7 @@
                 <div class="card-header">
                     <h2>Restaurants List</h2>
 
-
+                    {{-- filtravimo pradzia --}}
                     <div class="make-inline">
                         <form action="{{route('restaurant.index')}}" method="get" class="make-inline">
                             <div class="form-group make-inline">
@@ -25,9 +25,11 @@
                             <button type="submit" class="btn btn-outline-success btn-sm">Filter</button>
                         </form>
                         <a href="{{route('restaurant.index')}}" class="btn btn-outline-secondary btn-sm">Clear</a>
-
-
                     </div>
+                    {{-- filtravimo ppabaiga --}}
+
+
+
 
                     <div class="card-body">
 
